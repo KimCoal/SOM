@@ -1,6 +1,8 @@
 package com.som.som.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.som.som.dto.request.auth.SignUpDto;
 
@@ -11,6 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name="User")
+@Table(name="User")
 public class UserEntity {
 
     @Id
