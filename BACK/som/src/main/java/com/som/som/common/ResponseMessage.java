@@ -1,10 +1,12 @@
 package com.som.som.common;
 
 public class ResponseMessage {
-    public static final String SUCCESS = "Success.";
-    public static final String DATABASE_ERROR = "Database Error.";
+    public static final String SUCCESS = "성공!";
+    public static final String DATABASE_ERROR = "데이터베이스 에러.";
 
-    public static final String EXIST_EMAIL = "Existed Email.";
-    public static final String EXIST_NICKNAME = "Existed Nickname.";
-    public static final String EXIST_TEL_NUMBER = "Existed Tel Number.";
+    public static final String FAIL_SIGN_IN = "로그인 실패.";
+
+    public static final String EXIST_EMAIL = "이미 존재하는 이메일입니다.";
+    public static final String EXIST_NICKNAME = "이미 존재하는 닉네임입니다.";
+    public static final String EXIST_TEL_NUMBER = "이미 존재하는 전화번호 입니다.";
 }
