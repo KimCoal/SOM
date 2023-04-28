@@ -5,16 +5,19 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.som.som.common.ApiPath;
+import com.som.som.dto.request.user.PatchUserProfileDto;
 import com.som.som.dto.request.user.ValEmailDto;
 import com.som.som.dto.request.user.ValNickNameDto;
 import com.som.som.dto.request.user.ValTelNumDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.user.GetUserResponseDto;
+import com.som.som.dto.response.user.PatchUserProfileResponseDto;
 import com.som.som.dto.response.user.ValEmailResponseDto;
 import com.som.som.dto.response.user.ValNicknameResponseDto;
 import com.som.som.dto.response.user.ValTelNumResponseDto;
@@ -30,6 +33,7 @@ public class UserDataController {
     private final String VALIDATE_EMAIL = "/validate/email";
     private final String VALIDATE_NICKNAME = "/validate/nickname";
     private final String VALIDATE_TEL_NUMBER = "/validate/tel-number";
+    private final String PATCH_PROFILE = "/profile";
 
     @GetMapping(GET_USER)
     public ResponseDto<GetUserResponseDto> getUser(@AuthenticationPrincipal String email) {
@@ -58,6 +62,15 @@ public class UserDataController {
         @Valid @RequestBody ValTelNumDto requsetBody
     ) {
         ResponseDto<ValTelNumResponseDto> response = userValService.validateTelNumber(requsetBody);
+        return response;
+    }
+
+    @PatchMapping(PATCH_PROFILE)
+    public ResponseDto<PatchUserProfileResponseDto> patchProfile(
+        @AuthenticationPrincipal String email,
+        @Valid @RequestBody PatchUserProfileDto requestBody
+    ) {
+        ResponseDto<PatchUserProfileResponseDto> response = userValService.patchProfile(email, requestBody);
         return response;
     }
 }

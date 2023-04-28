@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.som.som.common.ResponseMessage;
+import com.som.som.dto.request.user.PatchUserProfileDto;
 import com.som.som.dto.request.user.ValEmailDto;
 import com.som.som.dto.request.user.ValNickNameDto;
 import com.som.som.dto.request.user.ValTelNumDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.user.GetUserResponseDto;
+import com.som.som.dto.response.user.PatchUserProfileResponseDto;
 import com.som.som.dto.response.user.ValEmailResponseDto;
 import com.som.som.dto.response.user.ValNicknameResponseDto;
 import com.som.som.dto.response.user.ValTelNumResponseDto;
@@ -84,5 +86,30 @@ public class UserValServiceImplements implements UserValService {
         }
 
         return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+    }
+
+    public ResponseDto<PatchUserProfileResponseDto> patchProfile(String email, PatchUserProfileDto dto) {
+
+        PatchUserProfileResponseDto data = null;
+
+        String profile = dto.getProfile();
+
+        try {
+
+            UserEntity userEntity = userRepository.findByEmail(email);
+            if (userEntity == null) return ResponseDto.setFailed(ResponseMessage.NOT_EXIST_USER);
+            
+            userEntity.setProfile(profile);
+            userRepository.save(userEntity);
+
+            data = new PatchUserProfileResponseDto(userEntity);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
     }
 }
