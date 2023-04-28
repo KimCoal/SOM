@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.som.som.common.ApiPath;
 import com.som.som.dto.request.user.ValEmailDto;
+import com.som.som.dto.request.user.ValNickNameDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.user.GetUserResponseDto;
 import com.som.som.dto.response.user.ValEmailResponseDto;
+import com.som.som.dto.response.user.ValNicknameResponseDto;
 import com.som.som.service.UserValService;
 
 @RestController
@@ -24,6 +26,7 @@ public class UserDataController {
 
     private final String GET_USER = "/";
     private final String VALIDATE_EMAIL = "/validate/email";
+    private final String VALIDATE_NICKNAME = "/validate/nickname";
 
     @GetMapping(GET_USER)
     public ResponseDto<GetUserResponseDto> getUser(@AuthenticationPrincipal String email) {
@@ -36,6 +39,14 @@ public class UserDataController {
         @Valid @RequestBody ValEmailDto requsetBody
     ) {
         ResponseDto<ValEmailResponseDto> response = userValService.validateEmail(requsetBody);
+        return response;
+    }
+
+    @PostMapping(VALIDATE_NICKNAME)
+    public ResponseDto<ValNicknameResponseDto> validateNickname(
+        @Valid @RequestBody ValNickNameDto requsetBody
+    ) {
+        ResponseDto<ValNicknameResponseDto> response = userValService.validateNickname(requsetBody);
         return response;
     }
     
