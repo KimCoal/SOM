@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.som.som.common.ApiPath;
 import com.som.som.dto.request.user.ValEmailDto;
 import com.som.som.dto.request.user.ValNickNameDto;
+import com.som.som.dto.request.user.ValTelNumDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.user.GetUserResponseDto;
 import com.som.som.dto.response.user.ValEmailResponseDto;
 import com.som.som.dto.response.user.ValNicknameResponseDto;
+import com.som.som.dto.response.user.ValTelNumResponseDto;
 import com.som.som.service.UserValService;
 
 @RestController
@@ -27,6 +29,7 @@ public class UserDataController {
     private final String GET_USER = "/";
     private final String VALIDATE_EMAIL = "/validate/email";
     private final String VALIDATE_NICKNAME = "/validate/nickname";
+    private final String VALIDATE_TEL_NUMBER = "/validate/tel-number";
 
     @GetMapping(GET_USER)
     public ResponseDto<GetUserResponseDto> getUser(@AuthenticationPrincipal String email) {
@@ -50,4 +53,11 @@ public class UserDataController {
         return response;
     }
     
+    @PostMapping(VALIDATE_TEL_NUMBER)
+    public ResponseDto<ValTelNumResponseDto> validateTelNumber(
+        @Valid @RequestBody ValTelNumDto requsetBody
+    ) {
+        ResponseDto<ValTelNumResponseDto> response = userValService.validateTelNumber(requsetBody);
+        return response;
+    }
 }
