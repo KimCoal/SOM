@@ -3,6 +3,7 @@ package com.som.som.entity.PK;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 import lombok.Data;
 

@@ -25,4 +25,11 @@ public class HateEntity {
     private int boardNumber;
     private String userProfileUrl;
     private String userNickname;
+
+    public HateEntity(UserEntity userEntity, int boardNumber) {
+        this.userEmail = userEntity.getEmail();
+        this.boardNumber = boardNumber;
+        this.userProfileUrl = userEntity.getProfile();
+        this.userNickname = userEntity.getNickname();
+    }
 }

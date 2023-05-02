@@ -11,4 +11,5 @@ public class ResponseMessage {
     public static final String EXIST_TEL_NUMBER = "이미 존재하는 전화번호 입니다.";
 
     public static final String NOT_EXIST_USER = "존재하지 않는 유저데이터 입니다.";
+    public static final String NOT_EXIST_BOARD = "존재하지 않는 게시물/게시글 입니다.";
 }

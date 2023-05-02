@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Liky")
-@Table(name="Liky")
+@Entity(name="Like")
+@Table(name="Like")
 @IdClass(LikePk.class)
 public class LikeEntity {
 
@@ -26,4 +26,10 @@ public class LikeEntity {
     private String userProfileUrl;
     private String userNickname;
     
+    public LikeEntity(UserEntity userEntity, int boardNumber) {
+        this.userEmail = userEntity.getEmail();
+        this.boardNumber = boardNumber;
+        this.userProfileUrl = userEntity.getProfile();
+        this.userNickname = userEntity.getNickname();
+    }
 }

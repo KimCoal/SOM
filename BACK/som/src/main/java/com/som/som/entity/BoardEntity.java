@@ -56,4 +56,7 @@ public class BoardEntity {
         this.hateCount = 0;
     }
     
+    public void increaseCommentCount() {
+        this.commentCount++;
+    }
 }
