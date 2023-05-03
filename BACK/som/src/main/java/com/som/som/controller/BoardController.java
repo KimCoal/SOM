@@ -25,6 +25,7 @@ import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.GetListResponseDto;
+import com.som.som.dto.response.board.GetMyListResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -47,6 +48,7 @@ public class BoardController {
 
     private final String GET_BOARD = "/{boardNumber}";
     private final String GET_LIST = "/list";
+    private final String GET_MY_LIST = "/my-list";
 
     @PostMapping(POST_BOARD)
     public ResponseDto<PostBoardResponseDto> postBoard(
@@ -116,6 +118,14 @@ public class BoardController {
     @GetMapping(GET_LIST)
     public ResponseDto<List<GetListResponseDto>> getList() {
         ResponseDto<List<GetListResponseDto>> response = boardService.getList();
+        return response;
+    }
+
+    @GetMapping(GET_MY_LIST)
+    public ResponseDto<List<GetMyListResponseDto>> getMyList(
+        @AuthenticationPrincipal String email
+    ) {
+        ResponseDto<List<GetMyListResponseDto>> response = boardService.getMyList(email);
         return response;
     }
 }

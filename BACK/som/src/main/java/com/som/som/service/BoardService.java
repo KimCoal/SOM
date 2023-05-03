@@ -11,6 +11,7 @@ import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.GetListResponseDto;
+import com.som.som.dto.response.board.GetMyListResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -27,4 +28,5 @@ public interface BoardService {
 
     public ResponseDto<GetBoardResponseDto> getBoard(int boardNumber);
     public ResponseDto<List<GetListResponseDto>> getList();
+    public ResponseDto<List<GetMyListResponseDto>> getMyList(String email);
 }

@@ -15,6 +15,7 @@ import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.GetListResponseDto;
+import com.som.som.dto.response.board.GetMyListResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -277,6 +278,24 @@ public class BoardServiceImplements implements BoardService{
             data = GetListResponseDto.copyList(boardEntityList);
 
         } catch(Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
+    }
+    
+    public ResponseDto<List<GetMyListResponseDto>> getMyList(String email) {
+
+        List<GetMyListResponseDto> data = null;
+
+        try {
+
+            List<BoardEntity> boardList = boardRepository.findByWriterEmailOrderByBoardWriteDatetimeDesc(email);
+            data = GetMyListResponseDto.copyList(boardList);
+
+        } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
         }
