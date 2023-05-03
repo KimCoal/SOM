@@ -1,5 +1,7 @@
 package com.som.som.service;
 
+import java.util.List;
+
 import com.som.som.dto.request.board.HateDto;
 import com.som.som.dto.request.board.LikeDto;
 import com.som.som.dto.request.board.PatchBoardDto;
@@ -8,6 +10,7 @@ import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
+import com.som.som.dto.response.board.GetListResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -23,4 +26,5 @@ public interface BoardService {
     public ResponseDto<PatchBoardResponseDto> patchBoard(String email, PatchBoardDto dto);
 
     public ResponseDto<GetBoardResponseDto> getBoard(int boardNumber);
+    public ResponseDto<List<GetListResponseDto>> getList();
 }
