@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Like")
-@Table(name="Like")
+@Entity(name="Likes")
+@Table(name="Likes")
 @IdClass(LikePk.class)
 public class LikeEntity {
 
