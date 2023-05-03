@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.som.som.dto.request.board.PatchBoardDto;
 import com.som.som.dto.request.board.PostBoardDto;
 
 import lombok.AllArgsConstructor;
@@ -74,5 +75,11 @@ public class BoardEntity {
 
     public void decreaseHateCount() {
         this.hateCount--;
+    }
+
+    public void patch(PatchBoardDto dto) {
+        this.boardTitle = dto.getBoardTitle();
+        this.boardContent = dto.getBoardContent();
+        this.boardImgUrl = dto.getBoardImgUrl();
     }
 }

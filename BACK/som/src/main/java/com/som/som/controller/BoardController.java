@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.som.som.common.ApiPath;
 import com.som.som.dto.request.board.HateDto;
 import com.som.som.dto.request.board.LikeDto;
+import com.som.som.dto.request.board.PatchBoardDto;
 import com.som.som.dto.request.board.PostBoardDto;
 import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
+import com.som.som.dto.response.board.PatchBoardResponseDto;
 import com.som.som.dto.response.board.PostBoardResponseDto;
 import com.som.som.dto.response.board.PostCommentResponseDto;
 import com.som.som.service.BoardService;
@@ -31,6 +34,7 @@ public class BoardController {
     @Autowired private BoardService boardService;
 
     private final String POST_BOARD = "";
+    private final String PATCH_BOARD = "";
     private final String POST_COMMENT = "/comment";
     private final String LIKE = "/like";
     private final String HATE = "/hate";
@@ -80,6 +84,16 @@ public class BoardController {
     ) {
         ResponseDto<DeleteBoardResponseDto> response
             = boardService.deleteBoard(email, boardNumber);
+        return response;
+    }
+
+    @PatchMapping(PATCH_BOARD)
+    public ResponseDto<PatchBoardResponseDto> patchBoard(
+        @AuthenticationPrincipal String email, 
+        @Valid @RequestBody PatchBoardDto requestBody
+    ) {
+        ResponseDto<PatchBoardResponseDto> response = 
+            boardService.patchBoard(email, requestBody);
         return response;
     }
 }

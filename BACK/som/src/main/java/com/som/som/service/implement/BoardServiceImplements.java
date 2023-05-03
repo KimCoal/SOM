@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import com.som.som.common.ResponseMessage;
 import com.som.som.dto.request.board.HateDto;
 import com.som.som.dto.request.board.LikeDto;
+import com.som.som.dto.request.board.PatchBoardDto;
 import com.som.som.dto.request.board.PostBoardDto;
 import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
+import com.som.som.dto.response.board.PatchBoardResponseDto;
 import com.som.som.dto.response.board.PostBoardResponseDto;
 import com.som.som.dto.response.board.PostCommentResponseDto;
 import com.som.som.entity.BoardEntity;
@@ -195,6 +197,38 @@ public class BoardServiceImplements implements BoardService{
 
             boardRepository.delete(boardEntity);
             data = new DeleteBoardResponseDto(true);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
+    }
+
+    public ResponseDto<PatchBoardResponseDto> patchBoard(String email, PatchBoardDto dto) {
+
+        PatchBoardResponseDto data = null;
+
+        int boardNumber = dto.getBoardNumber();
+
+        try {
+
+            BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntity == null) return ResponseDto.setFailed(ResponseMessage.NOT_EXIST_BOARD);
+
+            boolean isEqualWriter = email.equals(boardEntity.getWriterEmail());
+            if (!isEqualWriter) return ResponseDto.setFailed(ResponseMessage.NOT_PERMISSION);
+
+            boardEntity.patch(dto);
+            boardRepository.save(boardEntity);
+
+            List<LikeEntity> likyList = likeRepository.findByBoardNumber(boardNumber);
+            List<CommentEntity> commentList = commentRepository.findByBoardNumberOrderByWriteDatetimeDesc(boardNumber);
+            List<HateEntity> hateList = hateRepository.findByBoardNumber(boardNumber);
+
+            data = new PatchBoardResponseDto(boardEntity, commentList, likyList, hateList);
 
         } catch (Exception exception) {
             exception.printStackTrace();
