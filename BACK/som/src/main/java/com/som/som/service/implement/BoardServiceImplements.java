@@ -16,6 +16,7 @@ import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.GetListResponseDto;
 import com.som.som.dto.response.board.GetMyListResponseDto;
+import com.som.som.dto.response.board.GetSearchListResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -25,11 +26,15 @@ import com.som.som.entity.BoardEntity;
 import com.som.som.entity.CommentEntity;
 import com.som.som.entity.HateEntity;
 import com.som.som.entity.LikeEntity;
+import com.som.som.entity.RelatedSearchWordEntity;
+import com.som.som.entity.SearchWordLogEntity;
 import com.som.som.entity.UserEntity;
 import com.som.som.repository.BoardRepository;
 import com.som.som.repository.CommentRepository;
 import com.som.som.repository.HateRepository;
 import com.som.som.repository.LikeRepository;
+import com.som.som.repository.RelatedSearchWordRepository;
+import com.som.som.repository.SearchWordLogRepository;
 import com.som.som.repository.UserRepository;
 import com.som.som.service.BoardService;
 
@@ -41,6 +46,8 @@ public class BoardServiceImplements implements BoardService{
     @Autowired private CommentRepository commentRepository;
     @Autowired private LikeRepository likeRepository;
     @Autowired private HateRepository hateRepository;
+    @Autowired private SearchWordLogRepository searchWordLogRepository;
+    @Autowired private RelatedSearchWordRepository relatedSearchWordRepository;
 
     public ResponseDto<PostBoardResponseDto> postBoard(String email, PostBoardDto dto) {
 
@@ -294,6 +301,31 @@ public class BoardServiceImplements implements BoardService{
 
             List<BoardEntity> boardList = boardRepository.findByWriterEmailOrderByBoardWriteDatetimeDesc(email);
             data = GetMyListResponseDto.copyList(boardList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
+    }
+
+    public ResponseDto<List<GetSearchListResponseDto>> getSearchList(String searchWord, String previousSearchWord) {
+
+        List<GetSearchListResponseDto> data = null;
+
+        try {
+            SearchWordLogEntity searchWordLogEntity = new SearchWordLogEntity(searchWord);
+            searchWordLogRepository.save(searchWordLogEntity);
+
+            if (previousSearchWord != null && !previousSearchWord.isBlank()) {
+                RelatedSearchWordEntity relatedSearchWordEntity = new RelatedSearchWordEntity(searchWord, previousSearchWord);
+                relatedSearchWordRepository.save(relatedSearchWordEntity);
+            }
+
+            List<BoardEntity> boardList = boardRepository.findByBoardTitleContainsOrBoardContentContainsOrderByBoardWriteDatetimeDesc(searchWord, searchWord);
+            data = GetSearchListResponseDto.copyList(boardList);
 
         } catch (Exception exception) {
             exception.printStackTrace();

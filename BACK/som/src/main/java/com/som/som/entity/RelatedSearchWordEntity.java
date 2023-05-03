@@ -22,4 +22,9 @@ public class RelatedSearchWordEntity {
     private int sequence;
     private String searchWord;
     private String previousSearchWord;
+
+    public RelatedSearchWordEntity(String searchWord, String previousSearchWord) {
+        this.searchWord = searchWord;
+        this.previousSearchWord = previousSearchWord;
+    }
 }

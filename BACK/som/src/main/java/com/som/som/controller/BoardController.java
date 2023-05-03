@@ -26,6 +26,7 @@ import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.GetListResponseDto;
 import com.som.som.dto.response.board.GetMyListResponseDto;
+import com.som.som.dto.response.board.GetSearchListResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -40,8 +41,9 @@ public class BoardController {
     @Autowired private BoardService boardService;
 
     private final String POST_BOARD = "";
-    private final String PATCH_BOARD = "";
     private final String POST_COMMENT = "/comment";
+
+    private final String PATCH_BOARD = "";
     private final String LIKE = "/like";
     private final String HATE = "/hate";
     private final String DELETE_BOARD = "/{boardNumber}";
@@ -49,6 +51,8 @@ public class BoardController {
     private final String GET_BOARD = "/{boardNumber}";
     private final String GET_LIST = "/list";
     private final String GET_MY_LIST = "/my-list";
+    private final String GET_SEARCH_LIST = "/search-list/{searchWord}";
+    private final String GET_SEARCH_LIST_PREVIOUS = "/search-list/{searchWord}/{previousSearchWord}";
 
     @PostMapping(POST_BOARD)
     public ResponseDto<PostBoardResponseDto> postBoard(
@@ -126,6 +130,15 @@ public class BoardController {
         @AuthenticationPrincipal String email
     ) {
         ResponseDto<List<GetMyListResponseDto>> response = boardService.getMyList(email);
+        return response;
+    }
+
+    @GetMapping(value={GET_SEARCH_LIST_PREVIOUS, GET_SEARCH_LIST})
+    public ResponseDto<List<GetSearchListResponseDto>> getSearchList(
+        @PathVariable("searchWord") String searchWord,
+        @PathVariable(name="previousSearchWord", required=false) String previousSearchWord
+    ) {
+        ResponseDto<List<GetSearchListResponseDto>> response = boardService.getSearchList(searchWord, previousSearchWord);
         return response;
     }
 }
