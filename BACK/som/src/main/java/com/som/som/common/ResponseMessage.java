@@ -12,4 +12,9 @@ public class ResponseMessage {
 
     public static final String NOT_EXIST_USER = "존재하지 않는 유저데이터 입니다.";
     public static final String NOT_EXIST_BOARD = "존재하지 않는 게시물/게시글 입니다.";
+    public static final String NOT_PERMISSION = "권한이 존재하지 않습니다.";
+
+    public static final String LIKE_ERROR = "이미 싫어요를 눌렀습니다.";
+    public static final String HATE_ERROR = "이미 좋아요를 눌렀습니다.";
+    public static final String AUTO_DEL = "게시글이 자동으로 삭제되었습니다. 메인화면으로 이동해주세요.";
 }
