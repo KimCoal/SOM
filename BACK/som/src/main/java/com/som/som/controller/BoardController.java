@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.som.som.dto.request.board.PostBoardDto;
 import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
+import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -39,6 +41,8 @@ public class BoardController {
     private final String LIKE = "/like";
     private final String HATE = "/hate";
     private final String DELETE_BOARD = "/{boardNumber}";
+
+    private final String GET_BOARD = "/{boardNumber}";
 
     @PostMapping(POST_BOARD)
     public ResponseDto<PostBoardResponseDto> postBoard(
@@ -94,6 +98,14 @@ public class BoardController {
     ) {
         ResponseDto<PatchBoardResponseDto> response = 
             boardService.patchBoard(email, requestBody);
+        return response;
+    }
+
+    @GetMapping(GET_BOARD)
+    public ResponseDto<GetBoardResponseDto> getBoard(
+        @PathVariable("boardNumber") int boardNumber
+    ) {
+        ResponseDto<GetBoardResponseDto> response = boardService.getBoard(boardNumber);
         return response;
     }
 }

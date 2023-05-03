@@ -82,4 +82,8 @@ public class BoardEntity {
         this.boardContent = dto.getBoardContent();
         this.boardImgUrl = dto.getBoardImgUrl();
     }
+
+    public void increaseViewCount() {
+        this.viewCount++;
+    }
 }

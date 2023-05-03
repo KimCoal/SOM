@@ -7,6 +7,7 @@ import com.som.som.dto.request.board.PostBoardDto;
 import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
+import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -20,4 +21,6 @@ public interface BoardService {
     public ResponseDto<HateResponseDto> hate(String email, HateDto dto);
     public ResponseDto<DeleteBoardResponseDto> deleteBoard(String email, int boardNumber);
     public ResponseDto<PatchBoardResponseDto> patchBoard(String email, PatchBoardDto dto);
+
+    public ResponseDto<GetBoardResponseDto> getBoard(int boardNumber);
 }

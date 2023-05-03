@@ -13,6 +13,7 @@ import com.som.som.dto.request.board.PostBoardDto;
 import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
+import com.som.som.dto.response.board.GetBoardResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -229,6 +230,32 @@ public class BoardServiceImplements implements BoardService{
             List<HateEntity> hateList = hateRepository.findByBoardNumber(boardNumber);
 
             data = new PatchBoardResponseDto(boardEntity, commentList, likyList, hateList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
+    }
+
+    public ResponseDto<GetBoardResponseDto> getBoard(int boardNumber) {
+
+        GetBoardResponseDto data = null;
+
+        try {
+
+            BoardEntity boardEntity = boardRepository.findByBoardNumber(boardNumber);
+            if (boardEntity == null) return ResponseDto.setFailed(ResponseMessage.NOT_EXIST_BOARD);
+            List<LikeEntity> likyList = likeRepository.findByBoardNumber(boardNumber);
+            List<HateEntity> hateList = hateRepository.findByBoardNumber(boardNumber);
+            List<CommentEntity> commentList = commentRepository.findByBoardNumberOrderByWriteDatetimeDesc(boardNumber);
+            
+            boardEntity.increaseViewCount();
+            boardRepository.save(boardEntity);
+
+            data = new GetBoardResponseDto(boardEntity, commentList, likyList, hateList);
 
         } catch (Exception exception) {
             exception.printStackTrace();
