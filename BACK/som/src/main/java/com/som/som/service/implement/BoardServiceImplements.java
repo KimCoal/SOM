@@ -1,5 +1,9 @@
 package com.som.som.service.implement;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +18,13 @@ import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
+import com.som.som.dto.response.board.GetCateListResponseDto;
 import com.som.som.dto.response.board.GetListResponseDto;
 import com.som.som.dto.response.board.GetMyListResponseDto;
 import com.som.som.dto.response.board.GetSearchListResponseDto;
+import com.som.som.dto.response.board.GetTop12ResponseDto;
+import com.som.som.dto.response.board.GetTop30RelatedSearchWordResponseDto;
+import com.som.som.dto.response.board.GetTop30SearchWordResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -29,6 +37,8 @@ import com.som.som.entity.LikeEntity;
 import com.som.som.entity.RelatedSearchWordEntity;
 import com.som.som.entity.SearchWordLogEntity;
 import com.som.som.entity.UserEntity;
+import com.som.som.entity.resultSet.RelatedSearchWordResultSet;
+import com.som.som.entity.resultSet.SearchWordResultSet;
 import com.som.som.repository.BoardRepository;
 import com.som.som.repository.CommentRepository;
 import com.som.som.repository.HateRepository;
@@ -324,8 +334,97 @@ public class BoardServiceImplements implements BoardService{
                 relatedSearchWordRepository.save(relatedSearchWordEntity);
             }
 
-            List<BoardEntity> boardList = boardRepository.findByBoardTitleContainsOrBoardContentContainsOrderByBoardWriteDatetimeDesc(searchWord, searchWord);
+            List<BoardEntity> boardList = boardRepository.findByBoardTitleContainingIgnoreCaseOrBoardContentContainingIgnoreCaseOrderByBoardWriteDatetimeDesc(searchWord, searchWord);
             data = GetSearchListResponseDto.copyList(boardList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
+    }
+
+    public ResponseDto<List<GetTop12ResponseDto>> getTop3List() {
+        
+        List<GetTop12ResponseDto> data = null;
+        Date aWeekAgoDate = Date.from(Instant.now().minus(30, ChronoUnit.DAYS));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String aWeekAgo = simpleDateFormat.format(aWeekAgoDate);
+
+        try {
+            List<BoardEntity> boardList = boardRepository.findTop12ByBoardWriteDatetimeGreaterThanOrderByLikeCountDesc(aWeekAgo);
+            data = GetTop12ResponseDto.copyList(boardList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
+    }
+
+    public ResponseDto<List<GetTop12ResponseDto>> getTop12List() {
+        
+        List<GetTop12ResponseDto> data = null;
+        Date aMonthAgoDate = Date.from(Instant.now().minus(30, ChronoUnit.DAYS));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String aMonthAgo = simpleDateFormat.format(aMonthAgoDate);
+
+        try {
+            List<BoardEntity> boardList = boardRepository.findTop12ByBoardWriteDatetimeGreaterThanOrderByLikeCountDesc(aMonthAgo);
+            data = GetTop12ResponseDto.copyList(boardList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+
+    }
+
+    public ResponseDto<GetTop30SearchWordResponseDto> getTop30SearchWord() {
+        GetTop30SearchWordResponseDto data = null;
+
+        try {
+            List<SearchWordResultSet> searchWordList = searchWordLogRepository.findTop30();
+            data = GetTop30SearchWordResponseDto.copyList(searchWordList);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+    }
+
+    public ResponseDto<GetTop30RelatedSearchWordResponseDto> getTop30RelatedSearchWord(String searchWord) {
+        GetTop30RelatedSearchWordResponseDto data = null;
+
+        try {
+
+            List<RelatedSearchWordResultSet> relatedSearchWordList = 
+                relatedSearchWordRepository.findTop15(searchWord);
+            data = GetTop30RelatedSearchWordResponseDto.copyList(relatedSearchWordList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+    }
+
+    public ResponseDto<List<GetCateListResponseDto>> getCateList(String category) {
+
+        List<GetCateListResponseDto> data = null;
+
+        try {
+
+            List<BoardEntity> boardList = boardRepository.findByBoardCateContainsOrderByBoardWriteDatetimeDesc(category);
+            data = GetCateListResponseDto.copyList(boardList);
 
         } catch (Exception exception) {
             exception.printStackTrace();

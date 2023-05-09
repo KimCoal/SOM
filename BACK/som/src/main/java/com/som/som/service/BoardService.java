@@ -10,9 +10,13 @@ import com.som.som.dto.request.board.PostCommentDto;
 import com.som.som.dto.response.ResponseDto;
 import com.som.som.dto.response.board.DeleteBoardResponseDto;
 import com.som.som.dto.response.board.GetBoardResponseDto;
+import com.som.som.dto.response.board.GetCateListResponseDto;
 import com.som.som.dto.response.board.GetListResponseDto;
 import com.som.som.dto.response.board.GetMyListResponseDto;
 import com.som.som.dto.response.board.GetSearchListResponseDto;
+import com.som.som.dto.response.board.GetTop12ResponseDto;
+import com.som.som.dto.response.board.GetTop30RelatedSearchWordResponseDto;
+import com.som.som.dto.response.board.GetTop30SearchWordResponseDto;
 import com.som.som.dto.response.board.HateResponseDto;
 import com.som.som.dto.response.board.LikeResponseDto;
 import com.som.som.dto.response.board.PatchBoardResponseDto;
@@ -31,4 +35,8 @@ public interface BoardService {
     public ResponseDto<List<GetListResponseDto>> getList();
     public ResponseDto<List<GetMyListResponseDto>> getMyList(String email);
     public ResponseDto<List<GetSearchListResponseDto>> getSearchList(String searchWord, String previousSearchWord);
+    public ResponseDto<List<GetTop12ResponseDto>> getTop12List();
+    public ResponseDto<GetTop30SearchWordResponseDto> getTop30SearchWord();
+    public ResponseDto<GetTop30RelatedSearchWordResponseDto> getTop30RelatedSearchWord(String searchWord);
+    public ResponseDto<List<GetCateListResponseDto>> getCateList(String category);
 }
