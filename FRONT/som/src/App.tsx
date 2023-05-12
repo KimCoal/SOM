@@ -1,11 +1,13 @@
 import './App.css';
 
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from './stores';
-import { useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import axios, { AxiosResponse } from 'axios';
 import { GET_USER_URL, authorizationHeader } from './constants/api';
 import ResponseDto from './apis/response';
+import { GetUserResponseDto } from './apis/response/user';
 
 function App() {
 
@@ -38,21 +40,11 @@ function App() {
   }, [path]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <></>
+      <Routes>
+      </Routes>
+    </>
   );
 }
 
