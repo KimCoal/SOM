@@ -2,7 +2,6 @@ package com.som.som.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +15,14 @@ import com.som.som.dto.response.auth.SignInResponseDto;
 import com.som.som.dto.response.auth.SignUpResponseDto;
 import com.som.som.service.AuthService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(ApiPath.AUTH)
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired private AuthService authService;
+    private final AuthService authService;
 
     private final String SIGN_UP = "/sign-up";
     private final String SIGN_IN = "/sign-in";

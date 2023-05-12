@@ -18,6 +18,6 @@ public interface RelatedSearchWordRepository extends JpaRepository<RelatedSearch
                 "WHERE search_word = ?1 " +
                 "GROUP BY previous_search_word " + 
                 "ORDER BY count DESC " + 
-                "LIMIT 30", nativeQuery=true)
+                "LIMIT 30 ", nativeQuery=true)
     public List<RelatedSearchWordResultSet> findTop15(String searchWord);
 }

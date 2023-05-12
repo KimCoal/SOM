@@ -8,6 +8,8 @@ import axios, { AxiosResponse } from 'axios';
 import { GET_USER_URL, authorizationHeader } from './constants/api';
 import ResponseDto from './apis/response';
 import { GetUserResponseDto } from './apis/response/user';
+import NavigationBar from './views/NavigationBar';
+import Footer from './views/Footer';
 
 function App() {
 
@@ -22,7 +24,7 @@ function App() {
   }
 
   const getUserResponseHandler = (response: AxiosResponse<any, any>) => {
-    const { result, message, data } = response.data as ResponseDto<any>;
+    const { result, data } = response.data as ResponseDto<any>;
     if (!result || !data) {
       return;
     }
@@ -41,9 +43,12 @@ function App() {
 
   return (
     <>
-      <></>
+      <NavigationBar/>
       <Routes>
+        <Route path='/' element={(<></>)} />
+        <Route path='/auth' element={(<></>)} />
       </Routes>
+      { path.pathname !== '/auth' && (<Footer />) }
     </>
   );
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,11 +37,14 @@ import com.som.som.dto.response.board.PostBoardResponseDto;
 import com.som.som.dto.response.board.PostCommentResponseDto;
 import com.som.som.service.BoardService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(ApiPath.BOARD)
+@RequiredArgsConstructor
 public class BoardController {
     
-    @Autowired private BoardService boardService;
+    private final BoardService boardService;
 
     private final String POST_BOARD = "";
     private final String POST_COMMENT = "/comment";

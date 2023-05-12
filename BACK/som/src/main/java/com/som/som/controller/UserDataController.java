@@ -2,7 +2,6 @@ package com.som.som.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,11 +22,14 @@ import com.som.som.dto.response.user.ValNicknameResponseDto;
 import com.som.som.dto.response.user.ValTelNumResponseDto;
 import com.som.som.service.UserValService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(ApiPath.USER)
+@RequiredArgsConstructor
 public class UserDataController {
     
-    @Autowired private UserValService userValService;
+    private final UserValService userValService;
 
     private final String GET_USER = "/";
     private final String VALIDATE_EMAIL = "/validate/email";

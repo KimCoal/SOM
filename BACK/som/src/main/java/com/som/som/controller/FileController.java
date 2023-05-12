@@ -3,7 +3,8 @@ package com.som.som.controller;
 import com.som.som.common.ApiPath;
 import com.som.som.service.FileService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(ApiPath.FILE)
+@RequiredArgsConstructor
 public class FileController {
     
-    @Autowired private FileService fileService;
+    private final FileService fileService;
 
     private final String UPLOAD = "/upload";
     private final String GET_FILE = "/{fileName}";
