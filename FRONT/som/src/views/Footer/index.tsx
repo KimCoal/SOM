@@ -19,7 +19,7 @@ export default function Footer() {
           </IconButton>
         </Box>
       </Box>
-      <Typography sx={{ fontSize: '12px', fontWeight: 400, color: '#ffffff' }}>Copyright @ 2022 jukoyakki. All Rights Reserved.</Typography>
+      <Typography sx={{ fontSize: '12px', fontWeight: 400, color: '#ffffff' }}>Copyright @ 2023 . All Rights Reserved.</Typography>
     </Box>
   )
 }

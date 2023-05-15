@@ -10,6 +10,7 @@ import ResponseDto from './apis/response';
 import { GetUserResponseDto } from './apis/response/user';
 import NavigationBar from './views/NavigationBar';
 import Footer from './views/Footer';
+import AuthenticationView from './views/AuthView';
 
 function App() {
 
@@ -46,7 +47,7 @@ function App() {
       <NavigationBar/>
       <Routes>
         <Route path='/' element={(<></>)} />
-        <Route path='/auth' element={(<></>)} />
+        <Route path='/auth' element={(<AuthenticationView/>)} />
       </Routes>
       { path.pathname !== '/auth' && (<Footer />) }
     </>

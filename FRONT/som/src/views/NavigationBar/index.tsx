@@ -39,7 +39,7 @@ export default function NavigationBar() {
       <AppBar
         variant="outlined"
         position="static"
-        sx={{ p: "0px 120px", backgroundColor: "#FF5500" }}
+        sx={{ p: "0px 120px", height: '6vh', backgroundColor: "#FF5500" }}
       >
         <Toolbar>
           <Typography
@@ -61,7 +61,7 @@ export default function NavigationBar() {
             component="div"
             sx={{ mr: "20px",
               fontFamily: "nanumgothic",
-              display: { xs: "none", sm: "block", color: "white" },
+              display: { xs: "none", sm: "block", color: "white" }
             }}
             onClick={() => navigator("/board/categorise/Kr")}
           >
