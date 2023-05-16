@@ -64,7 +64,7 @@ export default function LoginCardView({ setLoginView }: Props) {
   };
 
   const signInResponseHandler = (response: AxiosResponse<any, any>) => {
-    const { result, data } = response.data as ResponseDto<SignInResponseDto>;
+    const { result, message, data } = response.data as ResponseDto<SignInResponseDto>;
     if (!result || !data) {
       setLoginError(true);
       return;
