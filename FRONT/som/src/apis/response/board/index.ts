@@ -3,9 +3,9 @@ import GetBoardResponseDto from './Get-Board.response.dto';
 import GetListResponseDto from './Get-List.response.dto';
 import GetMyListResponseDto from './Get-My-List.response.dto';
 import GetSearchListResponseDto from './Get-Search-List.response.dto';
-import GetTop3ListResponseDto from './Get-Top12-List.response.dto';
-import GetTop15RelatedSearchWordResponseDto from './Get-Top30-Related-Search-Word.response.dto';
-import GetTop15SearchWordResponseDto from './Get-Top30-Search-Word.response.dto';
+import GetTop12ListResponseDto from './Get-Top12-List.response.dto';
+import GetTop30RelatedSearchWordResponseDto from './Get-Top30-Related-Search-Word.response.dto';
+import GetTop30SearchWordResponseDto from './Get-Top30-Search-Word.response.dto';
 import LikeResponseDto from './Like.response.dto';
 import HateResponseDto from './Hate.response.dto';
 import PatchBoardResponseDto from './Patch-Board.response.dto';
@@ -19,9 +19,9 @@ export type {
     GetListResponseDto,
     GetMyListResponseDto,
     GetSearchListResponseDto,
-    GetTop3ListResponseDto,
-    GetTop15RelatedSearchWordResponseDto,
-    GetTop15SearchWordResponseDto,
+    GetTop12ListResponseDto,
+    GetTop30RelatedSearchWordResponseDto,
+    GetTop30SearchWordResponseDto,
     GetCateListResponseDto,
     LikeResponseDto,
     HateResponseDto,
