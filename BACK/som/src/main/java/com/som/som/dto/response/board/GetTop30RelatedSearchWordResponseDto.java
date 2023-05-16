@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetTop30RelatedSearchWordResponseDto {
     
-    private List<String> top15SearchWordList;
+    private List<String> top30SearchWordList;
 
     public static GetTop30RelatedSearchWordResponseDto copyList(List<RelatedSearchWordResultSet> list) {
         List<String> result = new ArrayList<>();
