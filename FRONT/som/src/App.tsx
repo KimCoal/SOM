@@ -14,6 +14,7 @@ import AuthenticationView from './views/AuthView';
 import Main from './views/Main';
 import SearchView from './views/SearchView';
 import CateView from './views/CateView';
+import MyPage from './views/MyPage';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
       <Routes>
         <Route path='/' element={(<Main />)} />
         <Route path='/auth' element={(<AuthenticationView/>)} />
+        <Route path='/mypage' element={(<MyPage/>)} />
         <Route path='/board'>
           <Route path='write' element={(<></>)} />
           <Route path='search/:content' element={(<SearchView />)} />
