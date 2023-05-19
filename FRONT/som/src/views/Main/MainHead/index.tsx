@@ -35,10 +35,7 @@ export default function MainHead() {
         <Box sx={{ pb: "40px", pl: "120px", pr: "120px" }}>
           <Box sx={{ pt: "80px", pb: "32px", textAlign: "center" }}>
             <Typography sx={{ fontSize: "40px", fontWeight: 400 }}>
-              SOM
-            </Typography>
-            <Typography sx={{ fontSize: "40px", fontWeight: 400 }}>
-              COMUNITY!!
+              Sound Of Music
             </Typography>
           </Box>
           <Box>
