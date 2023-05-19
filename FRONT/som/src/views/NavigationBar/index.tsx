@@ -32,7 +32,7 @@ export default function NavigationBar() {
       alert("검색어를 입력해주세요.");
       return;
     }
-    navigator("/board/search/${content}");
+    navigator(`/board/search/${content}`);
   };
   return (
     <Box>

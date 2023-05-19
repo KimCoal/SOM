@@ -12,6 +12,8 @@ import NavigationBar from './views/NavigationBar';
 import Footer from './views/Footer';
 import AuthenticationView from './views/AuthView';
 import Main from './views/Main';
+import SearchView from './views/SearchView';
+import CateView from './views/CateView';
 
 function App() {
 
@@ -49,6 +51,13 @@ function App() {
       <Routes>
         <Route path='/' element={(<Main />)} />
         <Route path='/auth' element={(<AuthenticationView/>)} />
+        <Route path='/board'>
+          <Route path='write' element={(<></>)} />
+          <Route path='search/:content' element={(<SearchView />)} />
+          <Route path='categorise/:category' element={(<CateView />)} />
+          <Route path='detail/:boardNumber' element={(<></>)} />
+          <Route path='update/:boardNumber' element={(<></>)} />
+        </Route>
       </Routes>
       { path.pathname !== '/auth' && (<Footer />) }
     </>
