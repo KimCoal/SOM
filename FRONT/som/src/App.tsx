@@ -17,6 +17,7 @@ import CateView from './views/CateView';
 import MyPage from './views/MyPage';
 import BoardDetail from './views/Board/BoardDetail';
 import BoardUpdate from './views/Board/BoardUpdate';
+import BoardWrite from './views/Board/BoardWrite';
 
 function App() {
 
@@ -56,7 +57,7 @@ function App() {
         <Route path='/auth' element={(<AuthenticationView/>)} />
         <Route path='/mypage' element={(<MyPage/>)} />
         <Route path='/board'>
-          <Route path='write' element={(<></>)} />
+          <Route path='write' element={(<BoardWrite/>)} />
           <Route path='search/:content' element={(<SearchView />)} />
           <Route path='categorise/:category' element={(<CateView />)} />
           <Route path='detail/:boardNumber' element={(<BoardDetail/>)} />

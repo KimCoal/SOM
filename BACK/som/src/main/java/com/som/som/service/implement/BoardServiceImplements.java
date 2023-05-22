@@ -101,8 +101,10 @@ public class BoardServiceImplements implements BoardService{
             boardRepository.save(boardEntity);
 
             List<CommentEntity> commentList = commentRepository.findByBoardNumberOrderByWriteDatetimeDesc(boardNumber);
+            List<LikeEntity> likeList = likeRepository.findByBoardNumber(boardNumber);
+            List<HateEntity> hateList = hateRepository.findByBoardNumber(boardNumber);
 
-            data = new PostCommentResponseDto(boardEntity, commentList);
+            data = new PostCommentResponseDto(boardEntity, commentList, likeList, hateList);
 
         } catch (Exception exception) {
             exception.printStackTrace();

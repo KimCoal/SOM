@@ -1,10 +1,9 @@
 import Board from './Board.interface';
 import Comment from './Comment.interface';
-import Liky from './Like.interface';
+import Likes from './Like.interface';
 import User from './User.interface';
 import Hate from './Hate.inerface';
 
-//? 인터페이스 관리
 export interface IPreviewItem {
     boardNumber: number;
     img: string | null;
@@ -47,4 +46,4 @@ export interface ICommentItem {
     commentDatetime: string;
 }
 
-export type { Board, Comment, Liky, Hate, User };
+export type { Board, Comment, Likes, Hate, User };

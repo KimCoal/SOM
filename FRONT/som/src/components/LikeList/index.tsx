@@ -1,9 +1,9 @@
 import { Avatar, Box, Typography } from '@mui/material'
 
-import { Liky } from 'src/interfaces'
+import { Likes } from 'src/interfaces'
 
 interface Props {
-    likeUser: Liky
+    likeUser: Likes
 }
 
 export default function LikeList({ likeUser }: Props) {

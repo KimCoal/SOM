@@ -18,7 +18,7 @@ import CommentList from 'src/components/CommentList';
 import LikeList from 'src/components/LikeList';
 import { usePagingHook } from 'src/hooks';
 import { useUserStore } from 'src/stores';
-import { Board, Comment, Liky } from 'src/interfaces';
+import { Board, Comment, Likes } from 'src/interfaces';
 import { getPageCount } from 'src/utils';
 import ResponseDto from 'src/apis/response';
 import { DeleteBoardResponseDto, GetBoardResponseDto, HateResponseDto, LikeResponseDto, PostCommentResponseDto } from 'src/apis/response/board';
@@ -44,10 +44,10 @@ export default function BoardDetail() {
 
     const [likeStatus, setLikeStatus] = useState<boolean>(false);
     const [openLike, setOpenLike] = useState<boolean>(false);
-    const [likeList, setLikeList] = useState<Liky[]>([]);
+    const [likeList, setLikeList] = useState<Likes[]>([]);
 
     const [hateStatus, setHateStatus] = useState<boolean>(false);
-    const [hateList, setHateList] = useState<Liky[]>([]);
+    const [hateList, setHateList] = useState<Likes[]>([]);
 
     const [openComment, setOpenComment] = useState<boolean>(false);
     const [commentContent, setCommentContent] = useState<string>('');
@@ -187,6 +187,7 @@ export default function BoardDetail() {
 
     const setBoardResponse = (data: GetBoardResponseDto | LikeResponseDto | PostCommentResponseDto | HateResponseDto) => {
         const { board, commentList, likeList, hateList} = data;
+        console.log(data);
         setBoard(board);
         setBoardList(commentList);
         setLikeList(likeList);
@@ -207,6 +208,7 @@ export default function BoardDetail() {
 
     useEffect(() => {
         if (!user) return;
+        console.log(likeList);
         const like = likeList.find((like) => like.userEmail === user.email);
         setLikeStatus(like !== undefined);
     }, [likeList]);
@@ -215,7 +217,7 @@ export default function BoardDetail() {
         if (!user) return;
         const hate = hateList.find((hate) => hate.userEmail === user.email);
         setHateStatus(hate !== undefined);
-    });
+    }, [hateList]);
 
   return (
     <Box sx={{ p: '100px 222px', whiteSpace: 'pre-wrap' }}>
