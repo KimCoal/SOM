@@ -32,9 +32,14 @@ export default function MainHead() {
     }, []);
 
     return (
-        <Box sx={{ pb: "40px", pl: "120px", pr: "120px" }}>
+        <Box sx={{pb: "40px",
+                  pl: "120px",
+                  pr: "120px",
+                  backgroundImage: `url("https://dynaimage.cdn.cnn.com/cnn/c_fill,g_auto,w_1200,h_675,ar_16:9/https%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F171204142317-colorscope-orange-image-sunset.jpg")`,
+                  backgroundPosition: '40% 60%',
+                  }}>
           <Box sx={{ pt: "80px", pb: "32px", textAlign: "center" }}>
-            <Typography sx={{ fontSize: "40px", fontWeight: 400 }}>
+            <Typography sx={{ fontSize: "70px", fontWeight: 400, fontFamily: "fantasy" }}>
               Sound Of Music
             </Typography>
           </Box>

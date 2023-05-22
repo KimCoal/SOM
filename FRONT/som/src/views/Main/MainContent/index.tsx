@@ -55,7 +55,12 @@ export default function MainContents() {
   }, [])
 
   return (
-    <Box sx={{ p: '40px 120px', backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+    <Box sx={{
+              p: '40px 120px',
+              backgroundColor: 'rgba(0, 0, 0, 0.05)',
+              backgroundRepeat : "no-repeat",
+              backgroundSize: 'inherit',
+              }}>
       <Box>
         <Typography sx={{ fontSize: '24px', fontWeight: 500 }}>최신 게시물</Typography>
       </Box>

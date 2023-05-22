@@ -187,7 +187,6 @@ export default function BoardDetail() {
 
     const setBoardResponse = (data: GetBoardResponseDto | LikeResponseDto | PostCommentResponseDto | HateResponseDto) => {
         const { board, commentList, likeList, hateList} = data;
-        console.log(data);
         setBoard(board);
         setBoardList(commentList);
         setLikeList(likeList);
@@ -208,7 +207,6 @@ export default function BoardDetail() {
 
     useEffect(() => {
         if (!user) return;
-        console.log(likeList);
         const like = likeList.find((like) => like.userEmail === user.email);
         setLikeStatus(like !== undefined);
     }, [likeList]);
