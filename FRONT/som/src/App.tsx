@@ -15,6 +15,8 @@ import Main from './views/Main';
 import SearchView from './views/SearchView';
 import CateView from './views/CateView';
 import MyPage from './views/MyPage';
+import BoardDetail from './views/Board/BoardDetail';
+import BoardUpdate from './views/Board/BoardUpdate';
 
 function App() {
 
@@ -57,8 +59,8 @@ function App() {
           <Route path='write' element={(<></>)} />
           <Route path='search/:content' element={(<SearchView />)} />
           <Route path='categorise/:category' element={(<CateView />)} />
-          <Route path='detail/:boardNumber' element={(<></>)} />
-          <Route path='update/:boardNumber' element={(<></>)} />
+          <Route path='detail/:boardNumber' element={(<BoardDetail/>)} />
+          <Route path='update/:boardNumber' element={(<BoardUpdate/>)} />
         </Route>
       </Routes>
       { path.pathname !== '/auth' && (<Footer />) }

@@ -6,7 +6,7 @@ interface Props {
     likeUser: Liky
 }
 
-export default function LikeListItem({ likeUser }: Props) {
+export default function LikeList({ likeUser }: Props) {
 
   return (
     <Box sx={{ display: 'inline-flex', alignItems: 'center', mr: '30px' }}>
