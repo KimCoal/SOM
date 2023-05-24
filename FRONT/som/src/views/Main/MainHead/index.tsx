@@ -56,7 +56,7 @@ export default function MainHead() {
             </Typography>
             <Grid container spacing={4}>
               {top12List.map((item) => (
-                <Grid item sm={30} md={2}>
+                <Grid item sm={30} md={2} sx={{ borderRadius: '20px' }}>
                   <PreviewMain previewItem={item} />
                 </Grid>
               ))}

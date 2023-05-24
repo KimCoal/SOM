@@ -15,8 +15,8 @@ export default function PreviewMain({ previewItem }: Props) {
     const backgroundImage = `url(${previewItem.boardImgUrl})`;
 
   return (
-    <Card>
-        <CardActionArea sx={{ height: '408px', backgroundImage: backgroundImage, backgroundSize: 'cover', backgroundColor: '#666666' }} onClick={() => navigator(`/board/detail/${previewItem.boardNumber}`)}>
+    <Card sx={{ borderRadius: '40px', backgroundColor: '#666666' }}>
+        <CardActionArea sx={{ height: '408px', backgroundImage: backgroundImage, backgroundSize: 'cover', backgroundColor: '#666666'}} onClick={() => navigator(`/board/detail/${previewItem.boardNumber}`)}>
             <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column-reverse' }}>
                 <Box sx={{ p: '24px' }}>
                     <Box sx={{ display: 'flex' }}>
