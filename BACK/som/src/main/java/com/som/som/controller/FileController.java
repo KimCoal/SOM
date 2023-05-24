@@ -3,6 +3,9 @@ package com.som.som.controller;
 import com.som.som.common.ApiPath;
 import com.som.som.service.FileService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.core.io.Resource;
@@ -18,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping(ApiPath.FILE)
 @RequiredArgsConstructor
+@Api(description="파일 모듈")
 public class FileController {
     
     private final FileService fileService;
@@ -25,16 +29,20 @@ public class FileController {
     private final String UPLOAD = "/upload";
     private final String GET_FILE = "/{fileName}";
 
+    @ApiOperation(value="파일 업로드", notes="Request Body에 150MB 이하의 file을 포함하여 요청을 하면, 성공시 다운로드 URL을 반환, 실패시 null을 반환")
     @PostMapping(UPLOAD)
     public String upload(
+        @ApiParam(value="업로드할 파일", required=true)
         @RequestParam("file") MultipartFile file
     ) {
         String response = fileService.upload(file);
         return response;
     }
 
+    @ApiOperation(value="파일 다운로드", notes="Path Variable에 fileName을 포함하여 요청하면, 성공시 해당하는 파일의 Resource를 반환, 실패시 null을 반환")
     @GetMapping(value=GET_FILE, produces={MediaType.ALL_VALUE})
     public Resource getFile(
+        @ApiParam(value="파일명", example="example.png", required=true)
         @PathVariable("fileName") String fileName
     ) {
         Resource response = fileService.getFile(fileName);

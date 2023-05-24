@@ -60,9 +60,9 @@ export default function MyPageContent() {
                 </Grid>
                 <Grid item sm={12} md={3}>
                     <Card variant='outlined'>
-                        <CardActionArea sx={{ p: '25px 0px', display: 'flex', justifyContent: 'center'}} onClick={() => navigator('/board/write')}>
+                        <CardActionArea sx={{ p: '25px 0px', display: 'flex', justifyContent: 'center', backgroundImage: `url("https://p4.wallpaperbetter.com/wallpaper/802/389/302/simple-orange-yellow-minimalism-wallpaper-preview.jpg")`}} onClick={() => navigator('/board/write')}>
                             <CreateIcon sx={{ mr: '6px' }} />
-                            <Typography sx={{ fontSize: '18px', fontWeight: 500 }}>글쓰기</Typography>
+                            <Typography sx={{ fontSize: '18px', fontWeight: 500, fontFamily: 'inherit' }}>글쓰기</Typography>
                         </CardActionArea>
                     </Card>
                 </Grid>

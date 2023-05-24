@@ -75,7 +75,13 @@ export default function MyPageHead() {
     }, []);
 
   return (
-    <Box sx={{ p: '40px 120px', display: 'flex' }}>
+    <Box sx={{ p: '40px 120px', display: 'flex',
+                backgroundImage: `url("https://e1.pxfuel.com/desktop-wallpaper/578/227/desktop-wallpaper-orange-aesthetic-gif-on-dog-aesthetic-orange.jpg")`,
+                backgroundRepeat : "no-repeat",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                width: '100vw'
+                }}>
         <Box>
             <IconButton onClick={onLogoutHandler}>
                 <Avatar sx={{ height: '120px', width: '120px' }} alt={user?.nickname} src={user?.profile ? user.profile: ''} />
@@ -83,13 +89,13 @@ export default function MyPageHead() {
         </Box>
         <Box sx={{ ml: '25px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography sx={{ fontSize: '24px', fontWeight: 500, color: 'rgba(0, 0, 0, 0.7)' }}>{user?.nickname}</Typography>
+                <Typography sx={{ fontSize: '24px', fontWeight: 500, color: 'rgba(0, 0, 0, 0.7)', fontFamily: "fantasy" }}>{user?.nickname}</Typography>
                 <IconButton sx={{ ml: '10px' }} onClick={() => onProfileUploadButtonHandler()}>
                     <AddPhotoAlternateOutlinedIcon />
                     <input ref={imageRef} hidden type='file' accept='image/*' onChange={(event) => onProfileUploadChangeHandler(event)} />
                 </IconButton>
             </Box>
-            <Typography sx={{ mt: '10px', fontSize: '16px', fontWeight: 500, color: 'rgba(0, 0, 0, 0.4)' }}>{user?.email}</Typography>
+            <Typography sx={{ mt: '10px', fontSize: '16px', fontWeight: 500, color: 'rgba(0, 0, 0, 0.6)', fontFamily: "fantasy" }}>{user?.email}</Typography>
         </Box>
     </Box>
   )

@@ -106,7 +106,7 @@ export default function BoardWrite() {
 
           <Box sx={{ width: '100%' }}>
             <Input fullWidth disableUnderline multiline minRows={5} placeholder='본문을 작성해주세요.' sx={{ fontSize: '18px', fontWeight: 500, lineHeight: '150%' }} onChange={(event) => onBoardContentChangeHandler(event)} onKeyDown={(event) => onBoardContentKeyPressHandler(event)}/>
-            <Box sx={{ width: '100%' }} component='img' src={boardImgUrl} />
+            <Box sx={{ width: '30%' }} component='img' src={boardImgUrl} />
           </Box>
 
           <IconButton>

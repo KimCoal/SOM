@@ -104,7 +104,7 @@ public class BoardServiceImplements implements BoardService{
             List<LikeEntity> likeList = likeRepository.findByBoardNumber(boardNumber);
             List<HateEntity> hateList = hateRepository.findByBoardNumber(boardNumber);
 
-            data = new PostCommentResponseDto(boardEntity, commentList, likeList, hateList);
+            data = new PostCommentResponseDto(boardEntity, commentList, hateList, likeList);
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -246,11 +246,11 @@ public class BoardServiceImplements implements BoardService{
             boardEntity.patch(dto);
             boardRepository.save(boardEntity);
 
-            List<LikeEntity> likyList = likeRepository.findByBoardNumber(boardNumber);
+            List<LikeEntity> likeList = likeRepository.findByBoardNumber(boardNumber);
             List<CommentEntity> commentList = commentRepository.findByBoardNumberOrderByWriteDatetimeDesc(boardNumber);
             List<HateEntity> hateList = hateRepository.findByBoardNumber(boardNumber);
 
-            data = new PatchBoardResponseDto(boardEntity, commentList, likyList, hateList);
+            data = new PatchBoardResponseDto(boardEntity, commentList, hateList, likeList);
 
         } catch (Exception exception) {
             exception.printStackTrace();

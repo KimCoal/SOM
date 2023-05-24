@@ -244,7 +244,7 @@ export default function BoardDetail() {
             <Divider sx={{ m: '40px 0px' }} />
             <Box>
                 <Typography sx={{ fontSize: '18px', fontWeight: 500, opacity: 0.7 }}>{board?.boardContent}</Typography>
-                { board?.boardImgUrl && (<Box sx={{ width: '100%', mt: '20px' }} component='img' src={board?.boardImgUrl} />) }
+                { board?.boardImgUrl && (<Box sx={{ width: '30%', mt: '20px' }} component='img' src={board?.boardImgUrl} />) }
             </Box>
             <Box sx={{ display: 'flex', mt: '20px' }}>
                 <Box sx={{ mr: '20px', display: 'flex' }}>
