@@ -45,4 +45,4 @@ public class WebSecurityConfig {
             .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/swagger/**", "/v2/api-docs", "/webjars/**");
     }
 
-}   
+}
